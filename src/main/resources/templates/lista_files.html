@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <h1>Elenco file caricati :</h1>
+            <div class="row col-md-12 table-responsive">
+                <table id="customerTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome File</th>
+                            <th>Tipo File</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item, rowStat: ${lista_files}" th:style="${rowStat.odd} ? 'color: gray' : 'color: blue;'">
+                            <td th:text="${item.id}">1</td>
+                            <td th:text="${item.fileName}">Jack</td>
+                            <td th:text="${item.fileType}">23</td>
+                            <td>
+                                <a class="btn btn-primary" th:href="@{'/downloadFile/' + ${item.id}} " >Scarica</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>  
+        </div>          
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+       
+<head>
+    <title>Lista DDT Fornitore</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <link href="/resources/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="/resources/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+
+    <link  href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+
+    
+<!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    
+    
+    
+<script>
+        function openModalDdtProvider(id){
+            $.ajax({
+                url:"/Provider/"+id+"/ModalDdt",
+                success: function(response){
+                    $("#contenitoreModal").html(response);
+                    $("#contenitoreModal").modal({keyboard:true, show:true});
+                }
+            });
+        }
+                  
+        function openModalAttachmentDdt(id){
+            $.ajax({
+                url:"/Ddt/"+id +"/ModalAttachment",
+                success: function(response){
+                    $("#contenitoreModal").html(response);
+                    $("#contenitoreModal").modal({keyboard:true, show:true});
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div layout:fragment="content">
+       
+
+        <div class="container-fluid">
+            <div class="modal fade" id="contenitoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>      
+
+            <h2>Fornitore:</h2>
+            
+            <table class="table">
+                <thead>
+                    <tr><th th:each="header: ${headerProvider}" th:text="${header}" /></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${provider.id}" />
+                        <td th:text="${provider.piva}" />
+                        <td th:text="${provider.Denominazione}" />
+                        <td th:text="${provider.Indirizzo}" />
+                    </tr>
+                </tbody>
+            </table>   
+            
+            
+            
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Elenco DDT</h4>
+<!--                            <p class="card-category"><a class="btn btn-info btn-xs" th:href="@{'/InvoicesIn/New'} "  >+</a></p>-->
+                        <a class="btn btn-info btn-xs" th:onclick="'javascript:openModalDdtProvider(\'' + ${provider.id} +'\');'" >
+                    <i class="material-icons">add</i>
+                </a> 
+                </div>
+            
+             <div class="card-body">
+                    <div class="table-responsive">
+
+           
+               
+            
+                <table class="table table-hover">
+                    <thead>
+                        <tr >
+                            <th>id</th>  
+                            <th>creatore</th>  
+                            <th>data</th>  
+                            <th>numero</th>  
+                            <th>importo</th>  
+                            <th>note</th>  
+                            <th>verificato</th>  
+                            <th>allegati</th>
+                            <th>fattura associata</th>  
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  th:each="x :${listaddt}"  id="table2row">
+                            <td th:text="${x.id}" />
+                            <td th:text="${x.creatore}" />
+                            <td th:text="${#dates.format(x.data, 'dd-MM-yyyy')}" />
+                            <td th:text="${x.numero}" />
+                            <td th:text="${x.importo}" />
+                            <td th:text="${x.note}" />
+                            <td th:text="${x.isVerificato()} ?  'Si' : 'No'">yes</td>
+
+                            <td>
+                                <div class="list-group">
+                                    
+                                    <a th:each="item : ${x.getListaFilesDDT()}" th:href="@{'/downloadFile/' + ${item.id}}"  th:text="${item.fileDescription}+ ' - ' + ${item.fileName}" class="btn btn-primary btn-xs" >Dapibus ac facilisis in</a>
+                                    <a class="btn btn-secondary btn-xs" th:onclick="'javascript:openModalAttachmentDdt(\'' + ${x.id} +  '\');'" >
+                                        <i class="material-icons">add</i>
+                                    </a>
+
+                                </div>
+                            </td>
+                            <td>
+                                <th:block th:if="${x.getXmlFatturaBase()}">
+                                    <a th:href="@{'/Invoice/Download/' + ${x.getXmlFatturaBase().getId()}}" th:text="${x.getXmlFatturaBase().getId()}">view</a>
+                                </th:block>
+                             </td> 
+                        </tr>
+                </tbody>
+            </table>
+            
+              </div>
+                </div>
+            
+            
+        </div>
+    </div> 
+</body>
+</html>

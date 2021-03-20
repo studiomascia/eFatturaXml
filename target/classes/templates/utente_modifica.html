@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <form class="form-horizontal" action="#"  th:action="@{'/Admin/User/' + ${utente.id}}"    th:object="${utente}"  method="POST" >
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Aggiorna i dati utente:</legend>
+                <div class="field">
+                  <label class="label" for="txtId">Id</label>
+                  <div class="control">
+                      <input readonly="true" id="txtId"  th:field="*{id}" name="txtId" type="text" placeholder="id" class="input "/>
+                  </div>
+                </div>
+                <!-- Text input-->
+                <div class="field">
+                    <label class="label" for="txtEmail">Email</label>
+                    <div class="control">
+                        <input readonly="true" id="txtEmail"  th:field="*{username}" name="txtEmail" type="text" placeholder="mail utente" class="input "/>
+                    </div>
+                </div>
+                <!-- Select Basic -->
+                <div class="field">
+                    <label class="label" for="ddlStato">Stato utente</label>
+                    <div class="control">
+                        <div class="select">
+                            <select id="ddlStato" th:field="*{stato}" name="ddlStato" class="">
+                              <option value="0">Attivo</option>
+                              <option value="1">Non Attivo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- Button -->
+                <div class="field">
+                  <label class="label" for="btn"></label>
+                  <div class="control">
+                    <button id="btn"  type="submit" name="btn" class="button is-primary">Aggiorna</button>
+                  </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

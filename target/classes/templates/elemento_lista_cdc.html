@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Thymeleaf Fragments sample</title>
+</head>
+<body>
+    <div th:fragment="header">
+        <h1>Thymeleaf Fragments sample</h1>
+    </div>
+    
+    <div id="alberoCentriDiCosto">
+        <div th:fragment="albero" th:remove="tag">
+            <ul>
+                <li th:each="node : ${lista_cdc}" >
+                    <span th:id="${node.id}" th:text="${node.text}" class="treeelement">Town hall</span>
+                    <div th:with="lista_cdc = ${node.getChildren()}" th:include="this::albero" th:remove="tag"></div>
+                </li>
+            </ul>
+        </div>
+        <script>$('#alberoCentriDiCosto').jstree();</script>
+    </div>
+
+</body>
+</html>

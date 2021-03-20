@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <title>Thymeleaf Fragments sample</title>
+</head>
+<body>
+    <div th:fragment="header">
+        <h1>Thymeleaf Fragments sample</h1>
+    </div>
+    <div th:fragment="albero">
+        <ul>
+            <li th:each="item : ${folders}">
+                
+                <span th:text="${item.folderFileName}"   th:onclick="'javascript:alert(' + ${item.id} + ')'" ></span>
+                <div th:with="folders = ${item.children}" th:include="fragments.html :: albero"></div>
+            </li>
+        </ul>
+    </div>
+    
+</body>
+</html>

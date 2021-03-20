@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/WORKSPACE/Sviluppo/ProgettiJava/gestionale(devtools-web-jpa-sql-lombok)%20jar/gestionale/../../../../Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd" uri="src/main/resources/jaxb/ItemXmlFattura/Schema_del_file_xml_FatturaPA_versione_1.2.1.xsd"/>
+    <system systemId="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd" uri="src/main/resources/jaxb/ItemXmlFattura/www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"/>
+</catalog>

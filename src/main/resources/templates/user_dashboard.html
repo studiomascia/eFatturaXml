@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Gesionale CONCRETE  - Studiomascia.it!</title>
+</head>
+<body>
+    <div layout:fragment="content">
+<!--
+            <div  th:if="${buongiorno}"  class="modal fade show" id="msgBuongiorno" tabindex="-1" role="dialog" data-show="true">            
+            
+                <iframe frameborder="no" scrolling="no" 
+                        src="https://www.paginainizio.com/frasi/_frasirndpi.php" 
+                        style="width:430px; height:200px; overflow:hidden; border: 1px solid #C0C0C0;"></iframe>
+            
+            </div>
+        <div th:if="${buongiorno}"><script> $('#msgBuongiorno').modal('show')</script></div>
+-->
+        <!--DIV MESSAGGIO-->
+        <div  th:if="${messaggio}"  class="modal fade show" id="MessageDiv" tabindex="-1" role="dialog" data-show="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Notifica</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body" th:text="${messaggio}"></div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" id="btnCloseMessageModal" onclick="closeModal();"  class="btn btn-danger" data-dismiss="modal" >Chiudi</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:if="${messaggio}"><script> $('#MessageDiv').modal('show')</script></div>
+        
+        <div class="container w-100">
+            <h2></h2>
+            <div class="row">
+                
+                <!--DIV BLOCCO Fornitori-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">                    
+                        <h4 class="card-header card-header-danger">Fornitori</h4>
+                        <div class="card-body">
+                            <p class="card-text" th:text="'Nel sistema sono presenti ' + ${nFornitori} + ' fornitori'">Contenuto</p>
+                            <a href="/ProvidersList" class="btn btn-primary">Elenco Fornitori</a>
+                        </div>
+                    </div>
+                </div>
+                  
+                
+                <!--DIV BLOCCO Fatture Passive-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header-info">Fatture Passive</h4>
+                        <div class="card-body">
+                            <p class="card-text" th:text="'Nel sistema sono state inserite ' + ${nFatturePassive} + ' fatture passive'">Contenuto.</p>
+                            <p class="card-text" th:text="'di cui  ' + ${nFatturePassiveNR} + ' sono prive di registrazione'">Contenuto.</p>
+                            <a href="/InvoicesIn/2021" class="btn btn-primary">Anno 2021</a><a href="/InvoicesIn/2020" class="btn btn-primary">Anno 2020</a> <a href="/InvoicesIn/New" class="btn btn-info">+</a>
+                        </div>                                                               
+                    </div>
+                </div>
+                
+                <!--DIV BLOCCO Fatture Attive-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header-success">Fatture Attive</h4>
+                        <div class="card-body">
+                            <p class="card-text" th:text="'Nel sistema sono state inserite ' + ${nFattureAttive} + ' fatture attive'">Contenuto.</p>
+                            <p class="card-text" th:text="'di cui  ' + ${nFattureAttiveNR} + ' sono prive di registrazione'">Contenuto.</p>
+                            <a href="/InvoicesOut" class="btn btn-primary">Lista Fatture</a><a href="/InvoicesOut/New"  class="btn btn-info">+</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--DIV BLOCCO Utenti-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header-danger">Utenti</h4>
+                        <div class="card-body">
+                            <p class="card-text" th:text="'Nel sistema sono attivi ' + ${numUtenti} + ' utenti'">Contenuto.</p>
+                            <a href="/Utenti" class="btn btn-primary">Lista Utenti</a>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!--DIV BLOCCO Risorse Umane-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">
+                        <h4 class="card-header card-header-warning">Dipendenti</h4>
+                        <div class="card-body">
+                            <p class="card-text" th:text="'La società ha: '  + ' dipendenti'">Contenuto.</p>
+                            <a href="#" class="btn btn-primary">Lista Dipendenti</a>
+                        </div>
+                    </div>
+                </div>
+                
+              
+                
+                <!--DIV BLOCCO Centri di costo-->
+                <div class="col-sm-4">
+                    <div class="card card-nav-tabs">                    
+                        <h4 class="card-header card-header-warning">Centri di costo</h4>
+                        <div class="card-body">
+                            <h5 class="card-title">Gestione centri di costo</h5>
+                            <p class="card-text">Area in cui si possono gestire i centri di costo.</p>
+                            <a href="/CentroDiCosto" class="btn btn-primary">Lista </a>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>   
+
+</body>
+</html>

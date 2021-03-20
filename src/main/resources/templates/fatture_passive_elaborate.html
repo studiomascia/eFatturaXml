@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <h1 th:text="${titolo}" >Elenco fatture elaborate</h1>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr class="headings">
+                        <th th:each="header: ${headers}" class="column-title" th:text="${header}" />
+                        <th>azione</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="even pointer" th:each="row: ${rows}" id="tablerow">
+                        <td th:each="header: ${headers}" th:text="${row.get(header)}" />
+                        <td>
+                            <a class="btn btn-primary" th:href="@{'/Invoice/Download/' + ${row.get('Id')}} " >Apri</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

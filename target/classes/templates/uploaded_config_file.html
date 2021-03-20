@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content">
+      <div class="container-fluid">
+         <h1>Elenco file caricati :</h1>
+        <table class="table table-striped">
+           
+            
+             <tr><th>id file</th> <th>nome del file</th><th>tipo di fle</th><th></th></tr>
+            <tr th:each="item : ${file}">
+                <td th:text="${item.id}"/>
+                <td th:text="${item.fileName}" />
+                <td>
+                   <a class="btn btn-primary" th:href="@{'/downloadConfigFile/' + ${item.id}} " >Scarica</a>
+                </td>
+            </tr>
+        </table>
+
+
+  
+</div>
+</body>
+</html>

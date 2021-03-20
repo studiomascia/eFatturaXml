@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <div layout:fragment="content">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Ristultato del test invio email</legend>
+                
+                <!-- Text input-->
+                <div class="field">
+                    <label class="label" for="txtEmail">Destinatario</label>
+                    <div class="control">
+                        <label id="txtEmail"  th:text="${destinatario}"></label>
+                    </div>
+                </div>
+                <!-- Select Basic -->
+                <div class="field">
+                    <label class="label" for="txtOggetto">Oggetto</label>
+                    <div class="control">
+                        <label id="txtOggetto"  th:text="${oggetto}"></label>
+                    </div>
+                </div>
+                <!-- Select Basic -->
+                <div class="field">
+                    <label class="label" for="txtTesto">Testo</label>
+                    <div class="control">
+                        <label  id="txtTesto"  th:text="${testo}"></label>
+                    </div>
+                </div>               
+                <div class="field">
+                    <label class="label" for="txtRisultato">Risultato</label>
+                    <div class="control">
+                        <label  id="txtRisultato"  th:text="${risultato}"></label>
+                    </div>
+                </div>               
+            </fieldset>
+     </div>
+</body>
+</html>

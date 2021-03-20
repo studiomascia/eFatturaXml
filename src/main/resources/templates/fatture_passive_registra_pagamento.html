@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="main-template">
+<head>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/>
+    <link href="/resources/assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!--<script src="/resources/assets/js/core/jquery.min.js" type="text/javascript"></script>-->
+    <!--<script src="/resources/assets/js/core/popper.min.js" type="text/javascript"></script>-->
+    <script src="/resources/assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+
+ 
+    <title>Template vuoto</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <form class="form-horizontal" th:action="@{'/InvoicesIn/Register/' + ${fattura.id}}" th:object="${fattura}"  method="POST" >
+            <fieldset>
+                <!-- Dati Registrazione Fattura -->
+                <legend>Registra i dati del pagamento della fattura:</legend>
+                <div class="field">
+                    <label class="label" for="txtId">Id</label>
+                    <div class="control">
+                        <input readonly="true" id="txtId"  th:field="*{id}" name="txtId" type="text" placeholder="id" class="input "/>
+                    </div>
+                </div>
+                <!--Text input-->
+                <div class="field">
+                   <label class="label" for="txtNumero">Numero Protocollo IVA</label>
+                   <div class="control">
+                       <input  id="txtNumero"  th:field="*{numeroRegistrazione}" name="txtNumero" type="text" placeholder="numero protocollo " class="input "/>
+                   </div>
+                </div>
+                <!--Select Basic--> 
+                <div class="field">
+                   <label class="label" for="txtDataRegistrazione">Data Registrazione</label>
+                   <div class="control">
+                       <div class="select">
+                           <input type="text" id="txtDataRegistrazione" th:field="${fattura.dataRegistrazione}" name="txtDataRegistrazione"  class=""/>
+                       </div>                                       
+                   </div>
+                </div>
+                <!--Button--> 
+                <div class="field">
+                    <label class="label" for="btn"></label>
+                    <div class="control">
+                        <button id="btn"  type="submit" name="btn" class="button is-primary">Registra</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>    
+</html>
