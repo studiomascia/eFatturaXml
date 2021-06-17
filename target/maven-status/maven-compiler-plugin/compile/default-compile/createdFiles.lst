@@ -64,6 +64,7 @@ it\studiomascia\gestionale\controllers\InvoiceController.class
 it\studiomascia\gestionale\service\UserServiceImpl.class
 it\studiomascia\gestionale\services\SecurityServiceImpl.class
 it\studiomascia\gestionale\xml\ContattiType.class
+it\studiomascia\gestionale\service\XmlFatturaBaseService$1.class
 it\studiomascia\gestionale\xml\AltriDatiGestionaliType.class
 it\studiomascia\gestionale\repository\CentroDiCostoRepository.class
 it\studiomascia\gestionale\repository\DdtRepository.class

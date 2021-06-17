@@ -65,7 +65,10 @@ public class ControlloFattura {
     public static final int PENDING  = 2;
     public static final int BLOCCATA = 3;
     
+    public  ControlloFattura() {
+        this.id=0;
     
+    }
     
     /**
      * @return the centroDiCosto

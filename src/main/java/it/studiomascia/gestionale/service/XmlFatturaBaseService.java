@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Consumer;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -96,27 +97,30 @@ public class XmlFatturaBaseService {
         int conta =0;
         //String strData="";
         //listaFatture.parallelStream().forEach(xmlFattura -> {
-        listaFatture.stream().forEach(xmlFattura -> {
-            System.out.println("xmlFattura.getId()= " + xmlFattura.getId() + " : " + Thread.currentThread().getName()); 
-            String strData = ((xmlFattura.getDataRegistrazione() == null)) ? "N/A" : formattaData.format(xmlFattura.getDataRegistrazione());
-
-            Map<String, Object> riga = new HashMap<String, Object>();
-            riga.put("Id", xmlFattura.getId());   
-            riga.put("TD", xmlFattura.getTipoDocumento());   
-            riga.put("Data Reg.",  strData);
-            riga.put("N.Reg.", xmlFattura.getNumeroRegistrazione());
-            //riga.put("Data",  xmlFattura.getDataFattura().toString());
-            riga.put("Data",  ((xmlFattura.getDataFattura()== null)) ? "N/A" : formattaData.format(xmlFattura.getDataFattura()));
-            riga.put("Numero", xmlFattura.getNumeroFattura());
-            riga.put("P.IVA",xmlFattura.getPartitaIva() );
-            riga.put("Denominazione",xmlFattura.getRagioneSociale() );
-            riga.put("Descrizione",xmlFattura.getDescrizione() );
-            riga.put("Importo", xmlFattura.getImportoFattura().toString());
-            riga.put("Saldata", xmlFattura.getStatoPagamento());
-            riga.put("Controllata", xmlFattura.getEsitoUltimoControllo());
-            righe.add(riga); 
-        
-        
+        listaFatture.stream().forEach(new Consumer<XmlFatturaBase>() {
+            @Override
+            public void accept(XmlFatturaBase xmlFattura) {
+                System.out.println("xmlFattura.getId()= " + xmlFattura.getId() + " : " + Thread.currentThread().getName());
+                String strData = ((xmlFattura.getDataRegistrazione() == null)) ? "N/A" : formattaData.format(xmlFattura.getDataRegistrazione());
+                
+                Map<String, Object> riga = new HashMap<String, Object>();
+                riga.put("Id", xmlFattura.getId());
+                riga.put("TD", xmlFattura.getTipoDocumento());
+                riga.put("Data Reg.",  strData);
+                riga.put("N.Reg.", xmlFattura.getNumeroRegistrazione());
+                //riga.put("Data",  xmlFattura.getDataFattura().toString());
+                riga.put("Data",  ((xmlFattura.getDataFattura()== null)) ? "N/A" : formattaData.format(xmlFattura.getDataFattura()));
+                riga.put("Numero", xmlFattura.getNumeroFattura());
+                riga.put("P.IVA",xmlFattura.getPartitaIva() );
+                riga.put("Denominazione",xmlFattura.getRagioneSociale() );
+                riga.put("Descrizione",xmlFattura.getDescrizione() );
+                riga.put("Importo", xmlFattura.getImportoFattura().toString());
+                riga.put("Saldata", xmlFattura.getStatoPagamento());
+                riga.put("Controllata", xmlFattura.getEsitoUltimoControllo());
+                String strData2 = ((xmlFattura.getUltimoControllo().getId() ==  0 ) ? "N/A" : xmlFattura.getUltimoControllo().getCentroDiCosto().getText());
+                riga.put("CDC", strData2);
+                righe.add(riga);
+            }
         });
         
             
